@@ -125,7 +125,9 @@ function displayResults(result) {
         
         // Animate results
         if (window.animateResult) {
-            window.animateResult(result.compatibility_percentage, result.compatible);
+            // window.animateResult(result.compatibility_percentage, result.compatible);
+            window.animateResult(result.compatibility_percentage);
+
         }
         
         // Show confetti for high compatibility
@@ -143,27 +145,51 @@ function displayResults(result) {
 }
 
 // ========== Update Result Content ==========
+// function updateResultContent(result) {
+//     const interpretationTitle = document.getElementById('interpretationTitle');
+//     const interpretationMessage = document.getElementById('interpretationMessage');
+    
+//     if (interpretationTitle && interpretationMessage) {
+//         interpretationTitle.textContent = result.interpretation;
+//         interpretationMessage.textContent = result.message;
+//     }
+    
+//     // Update colors based on compatibility
+//     const resultCard = document.querySelector('.result-card');
+//     if (resultCard) {
+//         if (result.compatibility_percentage >= 70) {
+//             resultCard.style.borderColor = 'rgba(230, 57, 70, 0.3)';
+//         } else if (result.compatibility_percentage >= 40) {
+//             resultCard.style.borderColor = 'rgba(139, 92, 246, 0.3)';
+//         } else {
+//             resultCard.style.borderColor = 'rgba(156, 163, 175, 0.3)';
+//         }
+//     }
+// }
+
 function updateResultContent(result) {
+    const title = document.getElementById('resultTitle');
+    const icon = document.getElementById('resultIcon');
     const interpretationTitle = document.getElementById('interpretationTitle');
     const interpretationMessage = document.getElementById('interpretationMessage');
-    
-    if (interpretationTitle && interpretationMessage) {
-        interpretationTitle.textContent = result.interpretation;
-        interpretationMessage.textContent = result.message;
+
+    // 🧠 MAIN TITLE (TOP)
+    title.textContent = result.label;
+
+    // ❤️ ICON LOGIC
+    if (result.compatibility_percentage >= 70) {
+        icon.textContent = '❤️';
+    } else if (result.compatibility_percentage >= 40) {
+        icon.textContent = '💫';
+    } else {
+        icon.textContent = '💔';
     }
-    
-    // Update colors based on compatibility
-    const resultCard = document.querySelector('.result-card');
-    if (resultCard) {
-        if (result.compatibility_percentage >= 70) {
-            resultCard.style.borderColor = 'rgba(230, 57, 70, 0.3)';
-        } else if (result.compatibility_percentage >= 40) {
-            resultCard.style.borderColor = 'rgba(139, 92, 246, 0.3)';
-        } else {
-            resultCard.style.borderColor = 'rgba(156, 163, 175, 0.3)';
-        }
-    }
+
+    // TEXT
+    interpretationTitle.textContent = result.interpretation;
+    interpretationMessage.textContent = result.message;
 }
+
 
 // ========== Show Error Message ==========
 function showError(message) {
