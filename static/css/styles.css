@@ -693,11 +693,19 @@ body {
     margin: 0 auto var(--spacing-xl);
 }
 
-.circle-svg {
+/* .circle-svg {
     width: 100%;
     height: 100%;
     transform: rotate(-90deg);
-}
+} */
+/* Update the container to handle the rotation */
+/* .circle-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg); /* Rotate the whole SVG instead of the path */
+    /* transform-origin: center; */
+/* } */ */
+
 
 .circle-bg {
     fill: none;
@@ -705,7 +713,7 @@ body {
     stroke-width: 12;
 }
 
-.circle-progress {
+/* .circle-progress {
     fill: none;
     stroke: url(#circleGradient);
     stroke-width: 12;
@@ -713,6 +721,19 @@ body {
     stroke-dasharray: 565.48;
     stroke-dashoffset: 565.48;
     transition: stroke-dashoffset 2s ease-out 0.5s;
+} */
+
+.circle-progress {
+    fill: none;
+    stroke: url(#circleGradient);
+    stroke-width: 12;
+    stroke-linecap: round;
+    /* transition is handled in JS now */
+}
+
+.circle-svg {
+    transform: rotate(-90deg);
+    transform-origin: center;
 }
 
 .percentage-text {
@@ -993,4 +1014,29 @@ input:focus-visible,
 select:focus-visible {
     outline: 3px solid var(--primary-red);
     outline-offset: 2px;
+}
+
+
+/* This makes the center of the circle transparent */
+.circle-bg {
+    fill: none; 
+    stroke: var(--blush); /* The light pink track */
+    stroke-width: 12;
+}
+
+.circle-progress {
+    fill: none; /* This removes the black center from the progress layer */
+    stroke: url(#circleGradient);
+    stroke-width: 12;
+    stroke-linecap: round;
+    /* transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1); */
+}
+
+/* Ensure the text inside doesn't have a black background either */
+.percentage-circle {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto;
+    background: transparent; /* Force transparency */
 }
