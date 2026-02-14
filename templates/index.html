@@ -367,7 +367,7 @@
                     <div class="result-icon" id="resultIcon">❤️</div>
                     <h2 class="result-title" id="resultTitle">Calculating...</h2>
                     
-                    <!-- Animated Percentage Circle -->
+                    <!-- Animated Percentage Circle
                     <div class="percentage-circle">
                         <svg class="circle-svg" viewBox="0 0 200 200">
                             <circle class="circle-bg" cx="100" cy="100" r="90"></circle>
@@ -377,6 +377,22 @@
                             <span class="percentage-number" id="percentageNumber">0</span>
                             <span class="percentage-symbol">%</span>
                         </div>
+                    </div> -->
+                    <div class="percentage-circle">
+                    <svg class="circle-svg" viewBox="0 0 240 240">
+                        <defs>
+                            <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#E63946" />
+                                <stop offset="100%" style="stop-color:#8B5CF6" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="circle-bg" cx="120" cy="120" r="90"></circle>
+                        <circle class="circle-progress" id="circleProgress" cx="120" cy="120" r="90"></circle>
+                    </svg>
+                    <div class="percentage-text">
+                        <span class="percentage-number" id="percentageNumber">0</span>
+                        <span class="percentage-symbol">%</span>
+                    </div>
                     </div>
 
                     <div class="result-interpretation">
