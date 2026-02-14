@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover your romantic compatibility with AI-powered predictions this Valentine's Day">
+    <title>AI Love Compatibility Checker 💝 | Valentine's Special</title>
+    
+    <!-- Preconnect to Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Beautiful typography pairing: Playfair Display + DM Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💝</text></svg>">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        <div class="floating-hearts" id="floatingHearts"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Hero Section -->
+        <header class="hero" id="heroSection">
+            <div class="hero-content">
+                <div class="sparkle">✨</div>
+                <h1 class="hero-title">
+                    <span class="title-line">AI Love</span>
+                    <span class="title-line gradient-text">Compatibility</span>
+                    <span class="title-line">Checker</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Discover the science behind your spark. Our AI analyzes real human connection data 
+                    to predict your romantic compatibility this Valentine's Day.
+                </p>
+                <div class="hero-badge">
+                    <span class="badge-icon">🤖</span>
+                    <span>Powered by Advanced Machine Learning</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Form Section -->
+        <main class="form-section" id="formSection">
+            <form id="compatibilityForm">
+                
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <div class="progress-text">
+                        <span id="progressPercent">0%</span>
+                        <span id="progressLabel">Let's start your journey</span>
+                    </div>
+                </div>
+
+                <!-- Introduction Card -->
+                <div class="intro-card glass-card">
+                    <h2 class="section-title">How This Works 💫</h2>
+                    <p class="intro-text">
+                        For each trait below, we'll ask you two simple questions: 
+                        <strong>How did your partner feel to you?</strong> and 
+                        <strong>How important is this quality to you?</strong>
+                        Your honest answers help our AI understand your unique connection.
+                    </p>
+                </div>
+
+                <!-- Trait Section 1: Attractiveness -->
+                <div class="trait-section glass-card" data-trait="attractiveness">
+                    <div class="trait-header">
+                        <div class="trait-icon">✨</div>
+                        <h3 class="trait-title">Physical Attraction</h3>
+                    </div>
+                    <div class="trait-content">
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How attractive did you find your partner?</span>
+                                <span class="slider-value" id="ratingAttractiveness_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="rating_attractiveness" id="ratingAttractiveness" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not at all</span>
+                                    <span>Very attractive</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How important is physical attraction to you?</span>
+                                <span class="slider-value" id="prefAttractiveness_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="pref_attractiveness" id="prefAttractiveness" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not important</span>
+                                    <span>Very important</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trait Section 2: Sincerity -->
+                <div class="trait-section glass-card" data-trait="sincerity">
+                    <div class="trait-header">
+                        <div class="trait-icon">💝</div>
+                        <h3 class="trait-title">Sincerity & Authenticity</h3>
+                    </div>
+                    <div class="trait-content">
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How sincere and genuine did your partner seem?</span>
+                                <span class="slider-value" id="ratingSincerity_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="rating_sincerity" id="ratingSincerity" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not sincere</span>
+                                    <span>Very sincere</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How important is sincerity to you?</span>
+                                <span class="slider-value" id="prefSincerity_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="pref_sincerity" id="prefSincerity" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not important</span>
+                                    <span>Very important</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trait Section 3: Intelligence -->
+                <div class="trait-section glass-card" data-trait="intelligence">
+                    <div class="trait-header">
+                        <div class="trait-icon">🧠</div>
+                        <h3 class="trait-title">Intelligence & Wit</h3>
+                    </div>
+                    <div class="trait-content">
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How intelligent did your partner appear to you?</span>
+                                <span class="slider-value" id="ratingIntelligence_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="rating_intelligence" id="ratingIntelligence" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not very</span>
+                                    <span>Extremely intelligent</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How important is intelligence to you?</span>
+                                <span class="slider-value" id="prefIntelligence_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="pref_intelligence" id="prefIntelligence" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not important</span>
+                                    <span>Very important</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trait Section 4: Fun -->
+                <div class="trait-section glass-card" data-trait="fun">
+                    <div class="trait-header">
+                        <div class="trait-icon">🎉</div>
+                        <h3 class="trait-title">Fun & Humor</h3>
+                    </div>
+                    <div class="trait-content">
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How fun and entertaining was your partner?</span>
+                                <span class="slider-value" id="ratingFun_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="rating_fun" id="ratingFun" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not fun</span>
+                                    <span>Extremely fun</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How important is fun to you in a relationship?</span>
+                                <span class="slider-value" id="prefFun_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="pref_fun" id="prefFun" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not important</span>
+                                    <span>Very important</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trait Section 5: Ambition -->
+                <div class="trait-section glass-card" data-trait="ambition">
+                    <div class="trait-header">
+                        <div class="trait-icon">🚀</div>
+                        <h3 class="trait-title">Ambition & Drive</h3>
+                    </div>
+                    <div class="trait-content">
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How ambitious and driven did your partner seem?</span>
+                                <span class="slider-value" id="ratingAmbition_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="rating_ambition" id="ratingAmbition" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not ambitious</span>
+                                    <span>Very ambitious</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How important is ambition to you?</span>
+                                <span class="slider-value" id="prefAmbition_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="pref_ambition" id="prefAmbition" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not important</span>
+                                    <span>Very important</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trait Section 6: Shared Interests -->
+                <div class="trait-section glass-card" data-trait="interests">
+                    <div class="trait-header">
+                        <div class="trait-icon">🎨</div>
+                        <h3 class="trait-title">Shared Interests</h3>
+                    </div>
+                    <div class="trait-content">
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How aligned were your partner's interests with yours?</span>
+                                <span class="slider-value" id="ratingInterests_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="rating_interests" id="ratingInterests" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Very different</span>
+                                    <span>Very aligned</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question-group">
+                            <label class="question-label">
+                                <span class="question-text">How important are shared interests to you?</span>
+                                <span class="slider-value" id="prefInterests_value">5</span>
+                            </label>
+                            <div class="slider-container">
+                                <input type="range" name="pref_interests" id="prefInterests" 
+                                       min="1" max="10" value="5" class="custom-slider">
+                                <div class="slider-labels">
+                                    <span>Not important</span>
+                                    <span>Very important</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Context Section -->
+                <div class="context-section glass-card">
+                    <h3 class="section-title">A Few More Details 🎯</h3>
+                    <div class="context-grid">
+                        
+                        <div class="context-item">
+                            <label class="context-label">
+                                <span class="label-icon">🎭</span>
+                                <span>Interest Similarity Level</span>
+                            </label>
+                            <select name="interest_correlation" id="interestCorrelation" class="custom-select">
+                                <option value="0.3">Low - Very different interests</option>
+                                <option value="0.6" selected>Medium - Some overlap</option>
+                                <option value="0.9">High - Very similar interests</option>
+                            </select>
+                        </div>
+
+                        <div class="context-item">
+                            <label class="context-label">
+                                <span class="label-icon">📅</span>
+                                <span>Age Gap Comfort</span>
+                            </label>
+                            <select name="age_diff" id="ageDiff" class="custom-select">
+                                <option value="0">No issue - Similar ages</option>
+                                <option value="5" selected>Slight - A few years</option>
+                                <option value="15">Large - Significant difference</option>
+                            </select>
+                        </div>
+
+                        <div class="context-item">
+                            <label class="context-label">
+                                <span class="label-icon">🌍</span>
+                                <span>Same Cultural Background?</span>
+                            </label>
+                            <select name="same_race" id="sameRace" class="custom-select">
+                                <option value="1" selected>Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="submit-container">
+                    <button type="submit" class="submit-button" id="submitButton">
+                        <span class="button-text">Calculate Our Compatibility</span>
+                        <span class="button-icon">💖</span>
+                        <div class="button-glow"></div>
+                    </button>
+                </div>
+
+            </form>
+        </main>
+
+        <!-- Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <div class="results-container">
+                
+                <!-- Result Card -->
+                <div class="result-card glass-card">
+                    <div class="result-icon" id="resultIcon">❤️</div>
+                    <h2 class="result-title" id="resultTitle">Calculating...</h2>
+                    
+                    <!-- Animated Percentage Circle -->
+                    <div class="percentage-circle">
+                        <svg class="circle-svg" viewBox="0 0 200 200">
+                            <circle class="circle-bg" cx="100" cy="100" r="90"></circle>
+                            <circle class="circle-progress" id="circleProgress" cx="100" cy="100" r="90"></circle>
+                        </svg>
+                        <div class="percentage-text">
+                            <span class="percentage-number" id="percentageNumber">0</span>
+                            <span class="percentage-symbol">%</span>
+                        </div>
+                    </div>
+
+                    <div class="result-interpretation">
+                        <h3 class="interpretation-title" id="interpretationTitle">Loading...</h3>
+                        <p class="interpretation-message" id="interpretationMessage">
+                            Please wait while we analyze your compatibility...
+                        </p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="result-actions">
+                        <button class="action-button primary" id="tryAgainButton">
+                            <span>Try Another Match</span>
+                            <span>🔄</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-text">
+                Made with 💝 for Valentine's Day 2026 | 
+                <span class="footer-highlight">AI-Powered by XGBoost</span>
+            </p>
+            <p class="footer-disclaimer">
+                This is for entertainment purposes. Real relationships are complex and beautiful 
+                in ways algorithms can't fully capture. Follow your heart! 💕
+            </p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/form-handler.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
