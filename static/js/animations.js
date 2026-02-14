@@ -178,55 +178,183 @@ function initializeScrollAnimations() {
 }
 
 // ========== Result Animation ==========
-function animateResult(percentage, compatible) {
-    const resultIcon = document.getElementById('resultIcon');
-    const resultTitle = document.getElementById('resultTitle');
+// function animateResult(percentage, compatible) {
+//     const resultIcon = document.getElementById('resultIcon');
+//     const resultTitle = document.getElementById('resultTitle');
+//     const percentageNumber = document.getElementById('percentageNumber');
+//     const circleProgress = document.getElementById('circleProgress');
+    
+//     if (!resultIcon || !resultTitle || !percentageNumber || !circleProgress) return;
+    
+//     // Set icon based on compatibility
+//     resultIcon.textContent = compatible ? '❤️' : '💔';
+//     resultTitle.textContent = compatible ? 'Compatible!' : 'Not Quite...';
+    
+//     // Animate percentage from 0 to actual value
+//     let currentPercentage = 0;
+//     const duration = 2000; // 2 seconds
+//     const increment = percentage / (duration / 16); // 60fps
+    
+//     const percentageInterval = setInterval(() => {
+//         currentPercentage += increment;
+//         if (currentPercentage >= percentage) {
+//             currentPercentage = percentage;
+//             clearInterval(percentageInterval);
+//         }
+//         percentageNumber.textContent = Math.round(currentPercentage);
+//     }, 16);
+    
+//     // Animate circle
+//     const circumference = 2 * Math.PI * 90; // radius = 90
+//     const offset = circumference - (percentage / 100) * circumference;
+    
+//     setTimeout(() => {
+//         circleProgress.style.strokeDashoffset = offset;
+//     }, 500);
+    
+//     // Add gradient to circle
+//     const svgElement = document.querySelector('.circle-svg');
+//     if (svgElement && !document.getElementById('circleGradient')) {
+//         const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+//         const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+//         gradient.setAttribute('id', 'circleGradient');
+//         gradient.innerHTML = `
+//             <stop offset="0%" style="stop-color:#E63946;stop-opacity:1" />
+//             <stop offset="50%" style="stop-color:#D81159;stop-opacity:1" />
+//             <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+//         `;
+//         defs.appendChild(gradient);
+//         svgElement.insertBefore(defs, svgElement.firstChild);
+//     }
+// }
+
+// function animateResult(percentage) {
+//     const resultIcon = document.getElementById('resultIcon');
+//     const percentageNumber = document.getElementById('percentageNumber');
+//     const circleProgress = document.getElementById('circleProgress');
+
+//     if (!percentageNumber || !circleProgress) return;
+
+//     // ❤️ ICON BASED ON PERCENTAGE (NO TITLE HERE)
+//     if (resultIcon) {
+//         if (percentage >= 70) {
+//             resultIcon.textContent = '❤️';
+//         } else if (percentage >= 40) {
+//             resultIcon.textContent = '💫';
+//         } else {
+//             resultIcon.textContent = '💔';
+//         }
+//     }
+
+//     // 🔢 Animate percentage number
+//     let current = 0;
+//     const duration = 1500;
+//     const increment = percentage / (duration / 16);
+
+//     const interval = setInterval(() => {
+//         current += increment;
+//         if (current >= percentage) {
+//             current = percentage;
+//             clearInterval(interval);
+//         }
+//         percentageNumber.textContent = Math.round(current);
+//     }, 16);
+
+//     // ⭕ Circle animation
+//     const circumference = 2 * Math.PI * 90;
+//     const offset = circumference - (percentage / 100) * circumference;
+
+//     setTimeout(() => {
+//         circleProgress.style.strokeDashoffset = offset;
+//     }, 300);
+// }
+
+// function animateResult(percentage) {
+//     const percentageNumber = document.getElementById('percentageNumber');
+//     const circleProgress = document.getElementById('circleProgress');
+
+//     if (!percentageNumber || !circleProgress) return;
+
+//     const radius = 90;
+//     const circumference = 2 * Math.PI * radius;
+
+//     // 🔁 RESET (THIS IS THE MAGIC)
+//     circleProgress.style.transition = 'none';
+//     circleProgress.style.strokeDasharray = circumference;
+//     circleProgress.style.strokeDashoffset = circumference;
+
+//     // force browser reflow
+//     circleProgress.getBoundingClientRect();
+
+//     // 🔄 enable animation again
+//     circleProgress.style.transition = 'stroke-dashoffset 1.2s ease';
+
+//     // ⭕ animate circle
+//     const offset = circumference - (percentage / 100) * circumference;
+//     circleProgress.style.strokeDashoffset = offset;
+
+//     // 🔢 animate number
+//     let current = 0;
+//     const duration = 1200;
+//     const increment = percentage / (duration / 16);
+
+//     const interval = setInterval(() => {
+//         current += increment;
+//         if (current >= percentage) {
+//             current = percentage;
+//             clearInterval(interval);
+//         }
+//         percentageNumber.textContent = Math.round(current);
+//     }, 16);
+// }
+
+function animateResult(percentage) {
     const percentageNumber = document.getElementById('percentageNumber');
     const circleProgress = document.getElementById('circleProgress');
-    
-    if (!resultIcon || !resultTitle || !percentageNumber || !circleProgress) return;
-    
-    // Set icon based on compatibility
-    resultIcon.textContent = compatible ? '❤️' : '💔';
-    resultTitle.textContent = compatible ? 'Compatible!' : 'Not Quite...';
-    
-    // Animate percentage from 0 to actual value
-    let currentPercentage = 0;
-    const duration = 2000; // 2 seconds
-    const increment = percentage / (duration / 16); // 60fps
-    
-    const percentageInterval = setInterval(() => {
-        currentPercentage += increment;
-        if (currentPercentage >= percentage) {
-            currentPercentage = percentage;
-            clearInterval(percentageInterval);
-        }
-        percentageNumber.textContent = Math.round(currentPercentage);
-    }, 16);
-    
-    // Animate circle
-    const circumference = 2 * Math.PI * 90; // radius = 90
-    const offset = circumference - (percentage / 100) * circumference;
-    
+
+    if (!percentageNumber || !circleProgress) return;
+
+    // 1. Get the actual radius from the element
+    const radius = circleProgress.r.baseVal.value;
+    const circumference = 2 * Math.PI * radius;
+
+    // 2. STROKE RESET (Force the browser to see it's at 0)
+    circleProgress.style.transition = 'none'; 
+    circleProgress.style.strokeDasharray = `${circumference} ${circumference}`;
+    circleProgress.style.strokeDashoffset = circumference;
+
+    // 3. FORCE REFLOW (The "Duty" Fix)
+    // This line is mandatory to make the transition work
+    void circleProgress.offsetWidth; 
+
+    // 4. START ANIMATION
     setTimeout(() => {
+        circleProgress.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+        const offset = circumference - (percentage / 100) * circumference;
         circleProgress.style.strokeDashoffset = offset;
-    }, 500);
-    
-    // Add gradient to circle
-    const svgElement = document.querySelector('.circle-svg');
-    if (svgElement && !document.getElementById('circleGradient')) {
-        const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-        const gradient = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
-        gradient.setAttribute('id', 'circleGradient');
-        gradient.innerHTML = `
-            <stop offset="0%" style="stop-color:#E63946;stop-opacity:1" />
-            <stop offset="50%" style="stop-color:#D81159;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
-        `;
-        defs.appendChild(gradient);
-        svgElement.insertBefore(defs, svgElement.firstChild);
+    }, 50);
+
+    // 5. NUMBER ANIMATION
+    let current = 0;
+    const duration = 1500;
+    const startTime = performance.now();
+
+    function updateNumber(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const val = Math.floor(progress * percentage);
+        
+        percentageNumber.textContent = val;
+
+        if (progress < 1) {
+            requestAnimationFrame(updateNumber);
+        } else {
+            percentageNumber.textContent = Math.round(percentage);
+        }
     }
+    requestAnimationFrame(updateNumber);
 }
+
 
 // ========== Confetti Effect (for high compatibility) ==========
 function createConfetti() {
